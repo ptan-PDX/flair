@@ -242,11 +242,11 @@ class TransformerDocumentEmbeddings(DocumentEmbeddings):
     @abstractmethod
     def embedding_length(self) -> int:
         """Returns the length of the embedding vector."""
-        '''return (
+        return (
             len(self.layer_indexes) * self.model.config.hidden_size
             if not self.layer_mean
-            else self.model.config.hidden_size
-        )'''
+            else self.model.config.hidden_size + 1000
+        )
 
     def __getstate__(self):
         # special handling for serializing transformer models
