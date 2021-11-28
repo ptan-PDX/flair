@@ -2117,6 +2117,62 @@ class NILCEmbeddings(WordEmbeddings):
     def __str__(self):
         return self.name
 
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!PATN!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+class LASEREmbeddings(WordEmbeddings):
+    def __init__(self, embeddings: str, model: str = "skip", size: int = 100):
+        """
+        Initializes portuguese classic word embeddings trained by NILC Lab (http://www.nilc.icmc.usp.br/embeddings).
+        Constructor downloads required files if not there.
+        :param embeddings: one of: 'fasttext', 'glove', 'wang2vec' or 'word2vec'
+        :param model: one of: 'skip' or 'cbow'. This is not applicable to glove.
+        :param size: one of: 50, 100, 300, 600 or 1000.
+        """
+
+        self.instance_parameters = self.get_instance_parameters(locals=locals())
+
+        base_path = "http://143.107.183.175:22980/download.php?file=embeddings/"
+
+        cache_dir = Path("embeddings") / embeddings.lower()
+
+        # GLOVE embeddings
+        if embeddings.lower() == "glove":
+            cached_path(
+                f"{base_path}{embeddings}/{embeddings}_s{size}.zip", cache_dir=cache_dir
+            )
+            embeddings = cached_path(
+                f"{base_path}{embeddings}/{embeddings}_s{size}.zip", cache_dir=cache_dir
+            )
+
+        elif embeddings.lower() in ["fasttext", "wang2vec", "word2vec"]:
+            cached_path(
+                f"{base_path}{embeddings}/{model}_s{size}.zip", cache_dir=cache_dir
+            )
+            embeddings = cached_path(
+                f"{base_path}{embeddings}/{model}_s{size}.zip", cache_dir=cache_dir
+            )
+
+        elif not Path(embeddings).exists():
+            raise ValueError(
+                f'The given embeddings "{embeddings}" is not available or is not a valid path.'
+            )
+
+        self.name: str = str(embeddings)
+        self.static_embeddings = True
+
+        log.info("Reading embeddings from %s" % embeddings)
+        self.precomputed_word_embeddings = gensim.models.KeyedVectors.load_word2vec_format(
+            open_inside_zip(str(embeddings), cache_dir=cache_dir)
+        )
+
+        self.__embedding_length: int = self.precomputed_word_embeddings.vector_size
+        super(TokenEmbeddings, self).__init__()
+
+    @property
+    def embedding_length(self) -> int:
+        return self.__embedding_length
+
+    def __str__(self):
+        return self.name
 
 def replace_with_language_code(string: str):
     string = string.replace("arabic-", "ar-")
