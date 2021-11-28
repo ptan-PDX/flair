@@ -29,6 +29,9 @@ from .document import DocumentLMEmbeddings
 from .document import DocumentCNNEmbeddings
 from .document import SentenceTransformerDocumentEmbeddings
 
+# PTAN
+from .document import LASEREmbeddings
+
 # Expose image embedding classes
 from .image import ImageEmbeddings
 from .image import IdentityImageEmbeddings
