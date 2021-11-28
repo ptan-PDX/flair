@@ -19,6 +19,8 @@ from .token import HashEmbeddings
 from .token import MuseCrosslingualEmbeddings
 from .token import NILCEmbeddings
 
+
+
 # Expose document embedding classes
 from .document import DocumentEmbeddings
 from .document import TransformerDocumentEmbeddings
@@ -28,6 +30,9 @@ from .document import DocumentRNNEmbeddings
 from .document import DocumentLMEmbeddings
 from .document import DocumentCNNEmbeddings
 from .document import SentenceTransformerDocumentEmbeddings
+
+#PTAN
+from .document import LASEREmbeddings
 
 # Expose image embedding classes
 from .image import ImageEmbeddings
