@@ -11,7 +11,7 @@ setup(
     long_description_content_type="text/markdown",
     author="Alan Akbik",
     author_email="alan.akbik@gmail.com",
-    url="https://github.com/flairNLP/flair",
+    url="https://github.com/ptan-PDX/flair.git",
     packages=find_packages(exclude="tests"),  # same as name
     license="MIT",
     install_requires=required,
