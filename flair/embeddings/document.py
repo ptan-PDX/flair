@@ -242,6 +242,7 @@ class TransformerDocumentEmbeddings(DocumentEmbeddings):
     @abstractmethod
     def embedding_length(self) -> int:
         """Returns the length of the embedding vector."""
+        print('here')
         return (
             len(self.layer_indexes + 1000) * self.model.config.hidden_size
             if not self.layer_mean
