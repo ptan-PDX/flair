@@ -243,9 +243,9 @@ class TransformerDocumentEmbeddings(DocumentEmbeddings):
     def embedding_length(self) -> int:
         """Returns the length of the embedding vector."""
         return (
-            len(self.layer_indexes + 2) * (self.model.config.hidden_size + 21)
+            len(self.layer_indexes) * self.model.config.hidden_size
             if not self.layer_mean
-            else self.model.config.hidden_size + 1000
+            else self.model.config.hidden_size
         )
 
     def __getstate__(self):
