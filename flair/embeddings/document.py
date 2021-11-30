@@ -75,18 +75,7 @@ class LASEREmbeddings(DocumentEmbeddings):
     @property
     @abstractmethod
     def embed(self, sentences: Union[List[Sentence], Sentence]):
-        """Add embeddings to every sentence in the given list of sentences."""
-
-        # if only one sentence is passed, convert to list of sentence
-        if isinstance(sentences, Sentence):
-            sentences = [sentences]
-
-
-        '''res_sentences = self.model.embed_sentences(sentences)
-        return res_sentences'''
-        print('Im here 11')
-        self.model.embed_sentences(sentences)
-        print('Im here')
+        pass
 
     def embedding_length(self) -> int:
         """Returns the length of the embedding vector."""
