@@ -85,7 +85,7 @@ class LASEREmbeddings(DocumentEmbeddings):
         '''res_sentences = self.model.embed_sentences(sentences)
         return res_sentences'''
         print('Im here 11')
-        #self.embeddings.embed(sentences)
+        self.model.embed_sentences(sentences)
         print('Im here')
 
     def embedding_length(self) -> int:
