@@ -69,17 +69,14 @@ class LASEREmbeddings(DocumentEmbeddings):
 
         # gradients are enabled if fine-tuning is enabled
 
-        pass
+        return sentences
 
 
     @property
     @abstractmethod
-    def embed(self, sentences: Union[List[Sentence], Sentence]):
-        pass
-
     def embedding_length(self) -> int:
         """Returns the length of the embedding vector."""
-        pass
+        return 1000
 
     def __getstate__(self):
         # special handling for serializing transformer models
