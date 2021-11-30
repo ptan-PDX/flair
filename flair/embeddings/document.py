@@ -74,9 +74,9 @@ class LASEREmbeddings(DocumentEmbeddings):
     def forward(self, s):
         return self.model.embed_sentences(s)
 
-    def forward_more(self, s):
+    def embed(self, s, lang='en'):
         laser = Laser()
-        return laser.embed_sentences(s)
+        return laser.embed_sentences(s, lang)
 
     @property
     @abstractmethod
