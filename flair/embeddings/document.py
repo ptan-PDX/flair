@@ -63,18 +63,28 @@ class LASEREmbeddings(DocumentEmbeddings):
         #self.model.to(flair.device)
 
     @staticmethod
-    def _has_initial_cls_token(tokenizer: PreTrainedTokenizer) -> bool:
-        # most models have CLS token as last token (GPT-1, GPT-2, TransfoXL, XLNet, XLM), but BERT is initial
-        pass
 
     def _add_embeddings_internal(self, sentences: List[Sentence]) -> List[Sentence]:
         """Add embeddings to all words in a list of sentences."""
 
         # gradients are enabled if fine-tuning is enabled
+
         pass
+
 
     @property
     @abstractmethod
+    def embed(self, sentences: Union[List[Sentence], Sentence]):
+        """Add embeddings to every sentence in the given list of sentences."""
+
+        # if only one sentence is passed, convert to list of sentence
+        if isinstance(sentences, Sentence):
+            sentences = [sentences]
+
+
+        res_sentences = self.model.embed_sentences(sentences)
+        return res_sentences
+
     def embedding_length(self) -> int:
         """Returns the length of the embedding vector."""
         pass
